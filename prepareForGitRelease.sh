@@ -1,4 +1,6 @@
 # minor version bump 
+# npm run build
+# gac "build: bump version"
 npm version patch
 
 # create the current_release directory if it does not exist
