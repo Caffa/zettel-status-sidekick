@@ -2,6 +2,10 @@
 # Zettel Status Sidekick
 A plugin for Obsidian to visualize and track the development status of your notes, especially useful for Zettelkasten practitioners.
 
+## Pics 
+
+![What it looks like](visuals/image.png)
+
 ## Description
 Tired of losing track of which notes are fully fleshed out and which are still just fleeting ideas? Zettel Status Sidekick is here to help! This Obsidian plugin provides a handy side panel that displays the current status of your active note based on a series of customizable checks. It's designed to be a visual aid in your note-taking workflow, particularly if you're using the Zettelkasten method.
 The plugin checks various criteria you define, such as note length, presence of tags, links to other notes, and more, to give you a quick overview of how "complete" a note is. You can configure these checks to match your personal note development process and easily see at a glance which notes need more work and which are ready to be considered more permanent pieces of your knowledge system.
@@ -58,14 +62,14 @@ You can customize Zettel Status Sidekick to perfectly match your workflow in the
     - Alternatively, use the command "Open Note Status Panel" (accessible via the command palette Ctrl+P or Cmd+P).
 	4.	Configure Settings: Navigate to "Settings" -> "Zettel Status Sidekick" to customize the plugin to your preferences.
 	5.	Observe Note Status: As you work on your notes, the "Note Status" panel will automatically update to reflect the status of your active note based on your configured checks.
-Installation
-From within Obsidian
+## Installation
+### From within Obsidian
 	1.	Open Settings > Community plugins
 	2.	Click "Browse"
 	3.	Search for "Zettel Status Sidekick"
 	4.	Click "Install"
 	5.	Once installed, go back to "Community plugins" and enable "Zettel Status Sidekick"
-Manually
+### Manually
 	1.	Download the latest Release from the Releases section of the GitHub repository.
 	2.	Extract the plugin folder zettel-status-sidekick to your Obsidian vault's plugins folder: <your_vault>/.obsidian/plugins/.
 	- Note: On some machines the .obsidian folder may be hidden. On macOS you should be able to press Cmd+Shift+. to show the folder in Finder.
