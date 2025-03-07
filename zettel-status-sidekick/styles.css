@@ -12,6 +12,7 @@ If your plugin does not need CSS, delete this file.
     padding: 2px 6px;
     border-radius: 4px;
     font-size: 0.85em;
-    margin-bottom: 2px; /* Added margin-bottom to separate each line */
+    margin-bottom: 5px; /* Added margin-bottom to separate each line */
+    margin-right: 5px; /* Add horizontal spacing */
     display: inline-block;
 }
