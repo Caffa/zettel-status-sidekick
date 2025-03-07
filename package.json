@@ -1,6 +1,6 @@
 {
   "name": "zettel-status-sidekick",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple opinionated side window. This is a status screen to be kept open at the side, so you can see if your fleeting note has been transformed into a main note. The metrics follow Zettelkasten principles in Bob Doto's System of Writing",
   "main": "main.js",
   "scripts": {
