@@ -6,3 +6,12 @@ available in the app when your plugin is enabled.
 If your plugin does not need CSS, delete this file.
 
 */
+.tag {
+    background-color: var(--color-accent);
+    color: var(--background-primary);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    margin-bottom: 2px; /* Added margin-bottom to separate each line */
+    display: inline-block;
+}

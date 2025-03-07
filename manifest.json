@@ -1,11 +1,11 @@
 {
-	"id": "sample-plugin",
-	"name": "Sample Plugin",
+	"id": "zettel-status-sidekick",
+	"name": "Zettel Status Sidekick",
 	"version": "1.0.0",
-	"minAppVersion": "0.15.0",
-	"description": "Demonstrates some of the capabilities of the Obsidian API.",
-	"author": "Obsidian",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"minAppVersion": "1.7.7",
+	"description": "A simple opinionated side window. This is a status screen to be kept open at the side, so you can see if your fleeting note has been transformed into a main note. The metrics follow Zettelkasten principles in Bob Doto's System of Writing",
+	"author": "Pamela Wang",
+	"authorUrl": "https://github.com/Caffa",
+	"fundingUrl": "https://ko-fi.com/pamelawang_mwahacookie",
 	"isDesktopOnly": false
 }
