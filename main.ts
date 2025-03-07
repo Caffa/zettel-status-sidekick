@@ -1,4 +1,4 @@
-import { App, Plugin, PluginSettingTab, Setting, WorkspaceLeaf, ItemView, Notice } from 'obsidian';
+import { App, Plugin, PluginSettingTab, Setting, WorkspaceLeaf, ItemView, Notice, TFile } from 'obsidian';
 import { getAPI, DataviewApi } from 'obsidian-dataview';
 
 interface ZettelStatusSidekickSettings {
@@ -86,15 +86,20 @@ export default class ZettelStatusSidekick extends Plugin {
 	}
 
 	async openNoteStatusPanel() {
-		const leaves = this.app.workspace.getLeavesOfType(NoteStatusPanelView.VIEW_TYPE);
-		if (leaves.length === 0) {
-			await this.app.workspace.getRightLeaf(false).setViewState({
-				type: NoteStatusPanelView.VIEW_TYPE,
-			});
-		} else {
-			this.app.workspace.revealLeaf(leaves[0]);
-		}
-	}
+    const leaves = this.app.workspace.getLeavesOfType(NoteStatusPanelView.VIEW_TYPE);
+    if (leaves.length === 0) {
+        const rightLeaf = this.app.workspace.getRightLeaf(false);
+        if (rightLeaf) {
+            await rightLeaf.setViewState({
+                type: NoteStatusPanelView.VIEW_TYPE,
+            });
+        } else {
+          new Notice("Could not open right leaf");
+        }
+    } else {
+        this.app.workspace.revealLeaf(leaves[0]);
+    }
+}
 
 	async updateNoteStatusPanel() {
 		const leaves = this.app.workspace.getLeavesOfType(NoteStatusPanelView.VIEW_TYPE);
@@ -162,8 +167,12 @@ class NoteStatusPanelView extends ItemView {
 				}
 			}
 		}
-		const linkedInHub = this.plugin.settings.checkLinkedInHub && result.file.inlinks?.some((link) =>
-			link.file.folder?.includes(this.plugin.settings.hubFolderPath)
+		// const linkedInHub = this.plugin.settings.checkLinkedInHub && result.file.inlinks?.some((link) =>
+		// 	link.file.folder?.includes(this.plugin.settings.hubFolderPath)
+		// );
+
+		const linkedInHub = this.plugin.settings.checkLinkedInHub && result.file.inlinks?.some((link: TFile) =>
+			link.path.includes(this.plugin.settings.hubFolderPath)
 		);
 
 		// Build the enabled checks list based on individual settings.
