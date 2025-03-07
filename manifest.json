@@ -1,7 +1,7 @@
 {
 	"id": "zettel-status-sidekick",
 	"name": "Zettel Status Sidekick",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"minAppVersion": "1.7.7",
 	"description": "A simple opinionated side window. This is a status screen to be kept open at the side, so you can see if your fleeting note has been transformed into a main note. The metrics follow Zettelkasten principles in Bob Doto's System of Writing",
 	"author": "Pamela Wang",
