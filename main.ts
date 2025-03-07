@@ -158,15 +158,31 @@ class NoteStatusPanelView extends ItemView {
 		const tagged = this.plugin.settings.checkTags && result.file.tags && result.file.tags.length > 0;
 		
 		let linkedToIdeas = false;
-		if (this.plugin.settings.checkLinkedToIdeas && this.plugin.settings.customFieldNameLinksList) {
-			const linkFields = this.plugin.settings.customFieldNameLinksList.split(',').map(field => field.trim());
-			for (const field of linkFields) {
-				if (result[field] && result[field].length > 0) {
-					linkedToIdeas = true;
-					break;
+
+		if (this.plugin.settings.checkLinkedToIdeas) {
+			const customFieldNameLinksList = this.plugin.settings.customFieldNameLinksList?.trim();
+
+			if (customFieldNameLinksList) {
+				// If customFieldNameLinksList is provided, check only specified fields
+				const linkFields = customFieldNameLinksList.split(',').map(field => field.trim());
+				for (const field of linkFields) {
+					if (result?.[field]?.length > 0) {
+						linkedToIdeas = true;
+						break;
+					}
 				}
+			} else {
+				// If customFieldNameLinksList is empty or just spaces, count all outgoing links
+				let linkCount = 0;
+				for (const key in result) {
+					if (result[key]?.length > 0) {
+						linkCount += result[key].length;
+					}
+				}
+				linkedToIdeas = linkCount > 1;
 			}
 		}
+
 		// const linkedInHub = this.plugin.settings.checkLinkedInHub && result.file.inlinks?.some((link) =>
 		// 	link.file.folder?.includes(this.plugin.settings.hubFolderPath)
 		// );
@@ -495,7 +511,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 		containerEl.createEl('h3', { text: 'Custom Field Names' });
 		new Setting(containerEl)
 			.setName('Field Names for Link Check')
-			.setDesc('Comma-separated list of field names to check for "Linked to Ideas" status. (Default: next, prev, related)')
+			.setDesc('Comma-separated list of custom field names to check for links. (Default: next, prev, related).  If empty, will check for all links.')
 			.addText(text =>
 				text
 					.setPlaceholder('e.g., next, prev, related, see also')

@@ -124,3 +124,13 @@ Enjoy tracking your Zettelkasten Notes with Zettel Status Sidekick!
 If you find Zettel Status Sidekick useful on your journey to deeper, more connected thinking, I’d truly appreciate your support. Please consider buying me a coffee on [Ko-fi](https://ko-fi.com/pamelawang_mwahacookie) — your contribution helps me keep making tools that make our creative lives easier.
 
 Thank you for being a part of this adventure. Happy note-taking and connecting those brilliant ideas!
+
+# FAQ
+## How does the check for linked ideas work?
+
+If the `Field Names for Link Check` is filled, for example with `next, prev` as follows
+![alt text](visuals/custom-field-name-setting.png)
+then any text with this field, will be considered a linked idea
+![alt text](visuals/example-of-next-field.png)
+
+If the `Field Names for Link Check` is empty (no text), then we will search for all links in the file. 
