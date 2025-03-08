@@ -278,7 +278,7 @@ class NoteStatusPanelView extends ItemView {
 				small.style.fontSize = '0.8em';
 				small.style.color = 'gray';
 			}
-			row.createEl('td', { text: value ? '✅' : '❌' + (label === 'Developed' && !value ? ' *' + (result.file.size / this.plugin.settings.developedThreshold).toFixed(2) + '*' : '') });
+			row.createEl('td', { text: value ? '✅' : '❌' + (label === 'Developed' && !value ? ' ' + (result.file.size / this.plugin.settings.developedThreshold).toFixed(2) : '') });
 		};
 
 		enabledChecks.forEach(check => {
