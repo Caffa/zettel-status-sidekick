@@ -133,6 +133,7 @@ class NoteStatusPanelView extends ItemView {
 	async render() {
 		const container = this.containerEl.children[1];
 		container.empty();
+		container.addClass('note-status-panel');
 
 		const activeFile = this.plugin.app.workspace.getActiveFile();
 		if (!activeFile) {
@@ -256,7 +257,7 @@ class NoteStatusPanelView extends ItemView {
 			}
 		}
 
-		const table = container.createEl('table');
+		const table = container.createEl('table', { cls: 'status-table' });
 		const tbody = table.createEl('tbody');
 
 		const descriptors: { [key: string]: string } = {
@@ -274,11 +275,16 @@ class NoteStatusPanelView extends ItemView {
 			tdLabel.createEl('div', { text: label });
 			if (this.plugin.settings.showSubtitles && descriptors[label]) {
 				const small = tdLabel.createEl('small', { text: descriptors[label] });
-				small.style.fontStyle = 'italic';
-				small.style.fontSize = '0.8em';
-				small.style.color = 'gray';
 			}
-			row.createEl('td', { text: value ? '✅' : '❌' + (label === 'Developed' && !value ? ' ' + (result.file.size / this.plugin.settings.developedThreshold).toFixed(2) : '') });
+			const tdStatus = row.createEl('td');
+			const statusIcon = tdStatus.createEl('span', { cls: value ? 'status-icon success' : 'status-icon failure' });
+			statusIcon.innerText = value ? '✅' : '❌';
+			if (label === 'Developed' && !value) {
+				const percentage = (result.file.size / this.plugin.settings.developedThreshold * 100).toFixed(0);
+				const percentageEl = statusIcon.createEl('span', { text: ` (${percentage}%)`, cls: 'percentage-text' });
+				percentageEl.style.fontSize = '0.8em';
+				percentageEl.style.marginLeft = '5px';
+			}
 		};
 
 		enabledChecks.forEach(check => {
@@ -286,25 +292,24 @@ class NoteStatusPanelView extends ItemView {
 		});
 
 		if (this.plugin.settings.displayAliasAndTags) {
-			// Display aliases with a preceding label.
+			// Display aliases with a preceding label
 			if (result.file.aliases && result.file.aliases.length > 0) {
-				container.createEl('p', { text: `Aliases:` });
-				const aliasList = container.createEl('ul');
+				const aliasesContainer = container.createEl('div', { cls: 'aliases-container' });
+				aliasesContainer.createEl('p', { text: 'Aliases' });
+				const aliasList = aliasesContainer.createEl('ul');
 				result.file.aliases.forEach((alias: string) => {
 					aliasList.createEl('li', { text: alias });
 				});
 			}
-			// Display tags: each tag on its own line and clickable.
+
+			// Display tags
 			if (result.file.tags && result.file.tags.length > 0) {
 				const tagsContainer = container.createEl('div', { cls: 'tags-container' });
-				tagsContainer.createEl('p', { text: 'Tags:' });
+				tagsContainer.createEl('p', { text: 'Tags' });
+				const tagsList = tagsContainer.createEl('div', { cls: 'tags-list' });
 				result.file.tags.forEach((tag: string) => {
 					const tagText = tag.substring(1);
-					// Each tag in its own block-level element.
-					const tagEl = tagsContainer.createEl('div', { text: tagText });
-					tagEl.addClass('tag');
-					tagEl.style.cursor = 'pointer';
-					// Clicking launches an Obsidian search for the tag.
+					const tagEl = tagsList.createEl('div', { text: tagText, cls: 'tag' });
 					tagEl.onclick = () => {
 						this.plugin.app.workspace.openLinkText(`#${tagText}`, activeFile.path, false);
 					};

@@ -20,3 +20,6 @@ mv zettel-status-sidekick.zip release.zip
 # remove the current_release folder
 # rm -rf zettel-status-sidekick
 
+git add -A
+git commit -m "Prepare for Git Release"
+git push origin main

@@ -1,18 +1,102 @@
 /*
-
 This CSS file will be included with your plugin, and
 available in the app when your plugin is enabled.
-
-If your plugin does not need CSS, delete this file.
-
 */
+
+/* Status Icons */
+.status-icon.success {
+	color: var(--color-green);
+}
+.status-icon.failure {
+	color: var(--color-red);
+}
+.status-icon[title] {
+	position: relative;
+}
+.status-icon[title]:hover::after {
+	content: attr(title);
+	position: absolute;
+	background: var(--background-modifier-border);
+	color: var(--text-normal);
+	padding: 5px;
+	border-radius: 5px;
+	white-space: nowrap;
+	z-index: 10;
+}
+
+/* Tags and Aliases */
+.tags-container {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+.tags-container p {
+    font-weight: var(--font-bold);
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
 .tag {
-    background-color: var(--color-accent);
-    color: var(--background-primary);
-    padding: 2px 6px;
+    background-color: var(--interactive-accent);
+    color: var(--text-on-accent);
+    padding: 2px 8px;
     border-radius: 4px;
     font-size: 0.85em;
-    margin-bottom: 5px; /* Added margin-bottom to separate each line */
-    margin-right: 5px; /* Add horizontal spacing */
+    margin: 0 5px 5px 0;
     display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.tag:hover {
+    background-color: var(--interactive-accent-hover);
+}
+
+/* Aliases */
+.aliases-container {
+    margin-top: 20px;
+    padding: 10px;
+    border-top: 1px solid var(--background-modifier-border);
+}
+
+.aliases-container p {
+    font-weight: var(--font-bold);
+    margin-bottom: 8px;
+    color: var(--text-muted);
+}
+
+.aliases-container ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+/* Headers and Status */
+.note-status-panel h1, .note-status-panel h2 {
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--background-modifier-border);
+    color: var(--text-normal);
+}
+
+/* Status Table */
+.status-table {
+    width: 100%;
+    border-spacing: 0 8px;
+}
+
+.status-table td {
+    padding: 5px;
+}
+
+.status-table td:first-child {
+    font-weight: var(--font-semibold);
+}
+
+.status-table small {
+    display: block;
+    color: var(--text-muted);
+    font-style: italic;
+    font-size: 0.8em;
+    margin-top: 2px;
 }
