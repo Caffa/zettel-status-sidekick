@@ -1,7 +1,7 @@
 
 # Zettel Status Sidekick
 
-Welcome to **Zettel Status Sidekick**—an Obsidian plugin designed to help you visualize and track the development of the note you are currently working on. This project is meant to be an opinionated sidekick that follows Bob Doto’s *A System for Writing* Zettelkasten style. 
+Welcome to **Zettel Status Sidekick**—an Obsidian plugin designed to help you visualize and track the development of the note you are currently working on. This project is meant to be an opinionated sidekick that follows Bob Doto’s *A System for Writing* Zettelkasten style.
 
 What Is It?
 
@@ -16,35 +16,34 @@ Process notes with an easy visual checklist at the side. One glance assessment f
 
 This workflow is a practical guide to evolving a fleeting idea into a complete, connected main note. Here’s how I do it:
 
-
-1. **Developed Idea:** 
+1. **Developed Idea:**
    - **Start with a Fleeting Thought:**Jot down a quick idea—like “We need to test rational things to see if they are false assumptions.”
    - **Reflect:**Ask yourself, “Is there a reminder, a task, or a potential insight here?”
 
-2. **Core Idea:** 
-   - **Expand Your Thoughts:**Open a new note (digital or physical) and rewrite the fleeting idea into clear, complete sentences.  
+2. **Core Idea:**
+   - **Expand Your Thoughts:**Open a new note (digital or physical) and rewrite the fleeting idea into clear, complete sentences.
    - **Example:**“Rational thought should be tested to determine if it’s based on false assumptions.”
 
-3. **Connected Idea:** 
-   - **Link to Existing Notes:**Look through your Zettelkasten for related ideas—perhaps a note on the scientific method or cognitive biases.  
-   - **Add Context:**For every link, briefly explain the connection. For instance:  
-     - *See note on **Scientific Method**: Testing assumptions is crucial for forming and validating hypotheses.*  
+3. **Connected Idea:**
+   - **Link to Existing Notes:**Look through your Zettelkasten for related ideas—perhaps a note on the scientific method or cognitive biases.
+   - **Add Context:**For every link, briefly explain the connection. For instance:
+     - *See note on **Scientific Method**: Testing assumptions is crucial for forming and validating hypotheses.*
      - *See note on **Cognitive Biases**: Challenging rational thoughts helps uncover biases that lead to false assumptions.*
 
-4. **Alphanumeric ID:** 
+4. **Alphanumeric ID:**
    - **Index Your Thoughts:**Assign a unique alphanumeric ID (e.g., 1.2a) that shows where this note fits in the chain of ideas. This is 'how were my thoughts flowing at that time' rather than trying to give it more structure. If you want to organize into an essay, link it to a hub note (a note in the Hub folder).
 
-5. **Permanent Note Title:** 
+5. **Permanent Note Title:**
    - **Name It Clearly:**Craft a concise, declarative title like "Logic is a lie, experiment to expose false assumptions” that encapsulates the idea perfectly.
 
-6. **Transfer to Main Notes Folder:** 
+6. **Transfer to Main Notes Folder:**
    - **File Your Note:**Once it’s fully developed and connected, move your note to your main notes folder to keep your vault organized and your ideas accessible.
 
 Summary of the stages :
 1. (Developed Idea) Idea → More thoughts on this idea
-2. (Core Idea) Rewrite idea into complete note that others can understand 
+2. (Core Idea) Rewrite idea into complete note that others can understand
 3. (Connected Idea) Link to existing notes - Compass of Ideas - with context for each link
-4. Add Alphanumeric ID - Where is this in the chain of thought 
+4. Add Alphanumeric ID - Where is this in the chain of thought
 5. Permanent note title - a statement that encapsulates the argument of this note
 6. Transfer to Main Notes folder
 
@@ -91,14 +90,15 @@ You can customize Zettel Status Sidekick to perfectly match your workflow in the
 
 ## How to Use
 
-1. **Open the Status Panel:**  
+1. **Open the Status Panel:**
    Click the “Note Status” ribbon icon or use the command palette (Ctrl+P/Cmd+P) to open it.
-2. **Configure Your Settings:**  
+2. **Configure Your Settings:**
    Visit **Settings > Zettel Status Sidekick** to tailor the plugin to your unique workflow.
-3. **Start Transforming Your Ideas:**  
+3. **Start Transforming Your Ideas:**
    As you work, watch your fleeting notes evolve into well-formed main notes with clear titles, connections, and IDs.
 
 ## Installation
+Note: Dataview plugin is required for this plugin to function. Please ensure that is installed.
 ### From within Obsidian
 1.	Open Settings > Community plugins
 2.	Click "Browse"
@@ -115,8 +115,8 @@ You can customize Zettel Status Sidekick to perfectly match your workflow in the
 
 Enjoy tracking your Zettelkasten Notes with Zettel Status Sidekick!
 
-## Inspiration 
-- Bob Doto's "A System for Writing" - Best book I have read on the zettelkasten method that made it all so clear  
+## Inspiration
+- Bob Doto's "A System for Writing" - Best book I have read on the zettelkasten method that made it all so clear
 - Roam Book Club by Beau Hann. - Where I learned 'indenting with intent' and 'how to make permanent notes'.
 
 ## A Humble Request
@@ -133,4 +133,5 @@ If the `Field Names for Link Check` is filled, for example with `next, prev` as 
 then any text with this field, will be considered a linked idea
 ![alt text](visuals/example-of-next-field.png)
 
-If the `Field Names for Link Check` is empty (no text), then we will search for all links in the file. 
+If the `Field Names for Link Check` is empty (no text), then we will search for all links in the file.
+
