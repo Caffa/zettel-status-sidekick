@@ -4,16 +4,16 @@ available in the app when your plugin is enabled.
 */
 
 /* Status Icons */
-.status-icon.success {
+.zettelSidekick-status-icon.success {
 	color: var(--color-green);
 }
-.status-icon.failure {
+.zettelSidekick-status-icon.failure {
 	color: var(--color-red);
 }
-.status-icon[title] {
+.zettelSidekick-status-icon[title] {
 	position: relative;
 }
-.status-icon[title]:hover::after {
+.zettelSidekick-status-icon[title]:hover::after {
 	content: attr(title);
 	position: absolute;
 	background: var(--background-modifier-border);
@@ -25,19 +25,19 @@ available in the app when your plugin is enabled.
 }
 
 /* Tags and Aliases */
-.tags-container {
+.zettelSidekick-tags-container {
     margin-top: 20px;
     padding: 10px;
     border-top: 1px solid var(--background-modifier-border);
 }
 
-.tags-container p {
+.zettelSidekick-tags-container p {
     font-weight: var(--font-bold);
     margin-bottom: 8px;
     color: var(--text-muted);
 }
 
-.tag {
+.zettelSidekick-tag {
     background-color: var(--interactive-accent);
     color: var(--text-on-accent);
     padding: 2px 8px;
@@ -49,30 +49,30 @@ available in the app when your plugin is enabled.
     transition: background-color 0.2s ease;
 }
 
-.tag:hover {
+.zettelSidekick-tag:hover {
     background-color: var(--interactive-accent-hover);
 }
 
 /* Aliases */
-.aliases-container {
+.zettelSidekick-aliases-container {
     margin-top: 20px;
     padding: 10px;
     border-top: 1px solid var(--background-modifier-border);
 }
 
-.aliases-container p {
+.zettelSidekick-aliases-container p {
     font-weight: var(--font-bold);
     margin-bottom: 8px;
     color: var(--text-muted);
 }
 
-.aliases-container ul {
+.zettelSidekick-aliases-container ul {
     margin: 0;
     padding-left: 20px;
 }
 
 /* Headers and Status */
-.note-status-panel h1, .note-status-panel h2 {
+.zettelSidekick-note-status-panel h1, .zettelSidekick-note-status-panel h2 {
     margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 2px solid var(--background-modifier-border);
@@ -80,23 +80,24 @@ available in the app when your plugin is enabled.
 }
 
 /* Status Table */
-.status-table {
+.zettelSidekick-status-table {
     width: 100%;
     border-spacing: 0 8px;
 }
 
-.status-table td {
+.zettelSidekick-status-table td {
     padding: 5px;
 }
 
-.status-table td:first-child {
+.zettelSidekick-status-table td:first-child {
     font-weight: var(--font-semibold);
 }
 
-.status-table small {
+.zettelSidekick-status-table small {
     display: block;
     color: var(--text-muted);
     font-style: italic;
     font-size: 0.8em;
     margin-top: 2px;
 }
+

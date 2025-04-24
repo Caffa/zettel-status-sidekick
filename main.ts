@@ -133,7 +133,7 @@ class NoteStatusPanelView extends ItemView {
 	async render() {
 		const container = this.containerEl.children[1];
 		container.empty();
-		container.addClass('note-status-panel');
+		container.addClass('zettelSidekick-note-status-panel');
 
 		const activeFile = this.plugin.app.workspace.getActiveFile();
 		if (!activeFile) {
@@ -157,7 +157,7 @@ class NoteStatusPanelView extends ItemView {
 		const idField = this.plugin.settings.zettelIdFieldName;
 		const alphaId = result[idField] !== undefined && String(result[idField]).trim() !== '';
 		const tagged = this.plugin.settings.checkTags && result.file.tags && result.file.tags.length > 0;
-		
+
 		let linkedToIdeas = false;
 
 		if (this.plugin.settings.checkLinkedToIdeas) {
@@ -257,7 +257,7 @@ class NoteStatusPanelView extends ItemView {
 			}
 		}
 
-		const table = container.createEl('table', { cls: 'status-table' });
+		const table = container.createEl('table', { cls: 'zettelSidekick-status-table' });
 		const tbody = table.createEl('tbody');
 
 		const descriptors: { [key: string]: string } = {
@@ -277,11 +277,11 @@ class NoteStatusPanelView extends ItemView {
 				const small = tdLabel.createEl('small', { text: descriptors[label] });
 			}
 			const tdStatus = row.createEl('td');
-			const statusIcon = tdStatus.createEl('span', { cls: value ? 'status-icon success' : 'status-icon failure' });
+			const statusIcon = tdStatus.createEl('span', { cls: value ? 'zettelSidekick-status-icon success' : 'zettelSidekick-status-icon failure' });
 			statusIcon.innerText = value ? '✅' : '❌';
 			if (label === 'Developed' && !value) {
 				const percentage = (result.file.size / this.plugin.settings.developedThreshold * 100).toFixed(0);
-				const percentageEl = statusIcon.createEl('span', { text: ` (${percentage}%)`, cls: 'percentage-text' });
+				const percentageEl = statusIcon.createEl('span', { text: ` (${percentage}%)`, cls: 'zettelSidekick-percentage-text' });
 				percentageEl.style.fontSize = '0.8em';
 				percentageEl.style.marginLeft = '5px';
 			}
@@ -294,7 +294,7 @@ class NoteStatusPanelView extends ItemView {
 		if (this.plugin.settings.displayAliasAndTags) {
 			// Display aliases with a preceding label
 			if (result.file.aliases && result.file.aliases.length > 0) {
-				const aliasesContainer = container.createEl('div', { cls: 'aliases-container' });
+				const aliasesContainer = container.createEl('div', { cls: 'zettelSidekick-aliases-container' });
 				aliasesContainer.createEl('p', { text: 'Aliases' });
 				const aliasList = aliasesContainer.createEl('ul');
 				result.file.aliases.forEach((alias: string) => {
@@ -304,12 +304,12 @@ class NoteStatusPanelView extends ItemView {
 
 			// Display tags
 			if (result.file.tags && result.file.tags.length > 0) {
-				const tagsContainer = container.createEl('div', { cls: 'tags-container' });
+				const tagsContainer = container.createEl('div', { cls: 'zettelSidekick-tags-container' });
 				tagsContainer.createEl('p', { text: 'Tags' });
-				const tagsList = tagsContainer.createEl('div', { cls: 'tags-list' });
+				const tagsList = tagsContainer.createEl('div', { cls: 'zettelSidekick-tags-list' });
 				result.file.tags.forEach((tag: string) => {
 					const tagText = tag.substring(1);
-					const tagEl = tagsList.createEl('div', { text: tagText, cls: 'tag' });
+					const tagEl = tagsList.createEl('div', { text: tagText, cls: 'zettelSidekick-tag' });
 					tagEl.onclick = () => {
 						this.plugin.app.workspace.openLinkText(`#${tagText}`, activeFile.path, false);
 					};
@@ -336,10 +336,6 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-
-		containerEl.createEl('h2', { text: 'Zettel Status Sidekick Settings' });
-
-		containerEl.createEl('h3', { text: 'General Settings' });
 
 		new Setting(containerEl)
 			.setName('Developed Threshold')
@@ -406,7 +402,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 
-		containerEl.createEl('h3', { text: 'Display Settings' });
+		new Setting(containerEl).setName('Display').setHeading();
 
 		new Setting(containerEl)
 			.setName('Use Static Progress Bar')
@@ -436,7 +432,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		// New settings for auto-moving notes when complete.
-		containerEl.createEl('h3', { text: 'Main Note Settings' });
+		containerEl.createEl('h3', { text: 'Main Note' });
 		new Setting(containerEl)
 			.setName('Auto-move Completed Notes')
 			.setDesc('Automatically move note to the main note folder when all checks are complete.')
@@ -463,7 +459,8 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 
-		containerEl.createEl('h3', { text: 'Checks to Enable' });
+		new Setting(containerEl).setName('Checks to Enable').setHeading();
+
 		new Setting(containerEl)
 			.setName('Check for Tags')
 			.setDesc('Enable the check for tags in the note.')
@@ -513,7 +510,8 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 
-		containerEl.createEl('h3', { text: 'Custom Field Names' });
+		new Setting(containerEl).setName('Custom Field Names').setHeading();
+
 		new Setting(containerEl)
 			.setName('Field Names for Link Check')
 			.setDesc('Comma-separated list of custom field names to check for links. (Default: next, prev, related).  If empty, will check for all links.')
@@ -542,3 +540,4 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 	}
 }
+
