@@ -126,6 +126,10 @@ class NoteStatusPanelView extends ItemView {
 		return 'Note Status';
 	}
 
+	getIcon() {
+		return 'rocket';
+	}
+
 	async onOpen() {
 		this.render();
 	}
@@ -203,10 +207,10 @@ class NoteStatusPanelView extends ItemView {
 			enabledChecks.push({ label: 'Tagged', value: tagged });
 		}
 		if (this.plugin.settings.checkLinkedToIdeas) {
-			enabledChecks.push({ label: 'Linked to Ideas', value: linkedToIdeas });
+			enabledChecks.push({ label: 'Linked to ideas', value: linkedToIdeas });
 		}
 		if (this.plugin.settings.checkLinkedInHub) {
-			enabledChecks.push({ label: 'Linked in Hub', value: linkedInHub });
+			enabledChecks.push({ label: 'Linked in hub', value: linkedInHub });
 		}
 
 		const enabledChecksCount = enabledChecks.length;
@@ -229,7 +233,7 @@ class NoteStatusPanelView extends ItemView {
 
 		// Render header with progress info and emoji.
 		if (allMet) {
-			container.createEl('h1', { text: `Main Note ${emoji}` });
+			container.createEl('h1', { text: `Main note ${emoji}` });
 		} else {
 			if (this.plugin.settings.useProgressBar) {
 				const progressPercent = enabledChecksCount > 0 ? metChecksCount / enabledChecksCount : 1;
@@ -262,11 +266,11 @@ class NoteStatusPanelView extends ItemView {
 
 		const descriptors: { [key: string]: string } = {
 			'Zettel id-ed': 'Assigned a unique numeric ID, placing it in train of thought',
-			'Developed': 'Elaborated on the fleeting note.',
+			'Developed': 'Elaborated on the fleeting note',
 			'Tagged': 'Categorized with relevant tags',
-			'Linked to Ideas': 'Connected to other related notes',
+			'Linked to ideas': 'Connected to other related notes',
 			'Titled': 'Has a meaningful name, the statement of the note',
-			'Linked in Hub': 'Connected to a central hub of knowledge'
+			'Linked in hub': 'Connected to a central hub of knowledge'
 		};
 
 		const addRow = (label: string, value: boolean) => {
@@ -338,7 +342,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 		containerEl.empty();
 
 		new Setting(containerEl)
-			.setName('Developed Threshold')
+			.setName('Developed threshold')
 			.setDesc('The threshold (in characters) to consider a note as developed.')
 			.addText(text =>
 				text
@@ -351,8 +355,8 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Hub Folder Path')
-			.setDesc('The folder path to consider for "Linked in Hub" check.')
+			.setName('Hub folder path')
+			.setDesc('The folder path to consider for "Linked in hub" check.')
 			.addText(text =>
 				text
 					.setPlaceholder('Enter folder path')
@@ -364,7 +368,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Show Subtitles')
+			.setName('Show subtitles')
 			.setDesc('Display descriptive subtitles for each status in the panel.')
 			.addToggle(toggle =>
 				toggle
@@ -377,7 +381,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Show Note Age')
+			.setName('Show note age')
 			.setDesc('Display how many days old the note is in the panel.')
 			.addToggle(toggle =>
 				toggle
@@ -390,7 +394,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Display Alias and Tags')
+			.setName('Display alias and tags')
 			.setDesc('Display note alias and tags below the checks in the panel.')
 			.addToggle(toggle =>
 				toggle
@@ -405,7 +409,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 		new Setting(containerEl).setName('Display').setHeading();
 
 		new Setting(containerEl)
-			.setName('Use Static Progress Bar')
+			.setName('Use static progress bar')
 			.setDesc('Show progress as a static progress bar instead of percentage.')
 			.addToggle(toggle =>
 				toggle
@@ -418,7 +422,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		new Setting(containerEl)
-			.setName('Emoji Series')
+			.setName('Emoji series')
 			.setDesc('Select which emoji series to use for progress status.')
 			.addDropdown(dropdown => dropdown
 				.addOption('egg', 'Egg/Chicken')
@@ -432,9 +436,9 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 			);
 
 		// New settings for auto-moving notes when complete.
-		containerEl.createEl('h3', { text: 'Main Note' });
+		containerEl.createEl('h3', { text: 'Main note' });
 		new Setting(containerEl)
-			.setName('Auto-move Completed Notes')
+			.setName('Auto-move completed notes')
 			.setDesc('Automatically move note to the main note folder when all checks are complete.')
 			.addToggle(toggle =>
 				toggle
@@ -446,7 +450,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 		new Setting(containerEl)
-			.setName('Main Note Folder Path')
+			.setName('Main note folder path')
 			.setDesc('Folder path to move completed notes into.')
 			.addText(text =>
 				text
@@ -459,10 +463,10 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 
-		new Setting(containerEl).setName('Checks to Enable').setHeading();
+		new Setting(containerEl).setName('Checks to enable').setHeading();
 
 		new Setting(containerEl)
-			.setName('Check for Tags')
+			.setName('Check for tags')
 			.setDesc('Enable the check for tags in the note.')
 			.addToggle(toggle =>
 				toggle
@@ -474,7 +478,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 		new Setting(containerEl)
-			.setName('Check for Zettel ID')
+			.setName('Check for zettel ID')
 			.setDesc('Enable the check for Zettel ID in the note metadata.')
 			.addToggle(toggle =>
 				toggle
@@ -486,7 +490,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 		new Setting(containerEl)
-			.setName('Check for Linked to Ideas')
+			.setName('Check for linked to ideas')
 			.setDesc('Enable the check for outgoing links (via custom fields) from the note.')
 			.addToggle(toggle =>
 				toggle
@@ -498,7 +502,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 		new Setting(containerEl)
-			.setName('Check for Linked in Hub')
+			.setName('Check for linked in hub')
 			.setDesc('Enable the check for links that reference a hub folder.')
 			.addToggle(toggle =>
 				toggle
