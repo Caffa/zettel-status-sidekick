@@ -126,6 +126,7 @@ class NoteStatusPanelView extends ItemView {
 		return 'Note Status';
 	}
 
+
 	getIcon() {
 		return 'rocket';
 	}
