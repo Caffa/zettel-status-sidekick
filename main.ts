@@ -1,4 +1,4 @@
-import { App, Plugin, PluginSettingTab, Setting, WorkspaceLeaf, ItemView, Notice, TFile } from 'obsidian';
+import { App, Plugin, PluginSettingTab, Setting, WorkspaceLeaf, ItemView, Notice, TFile, normalizePath, MarkdownView } from 'obsidian';
 import { getAPI, DataviewApi } from 'obsidian-dataview';
 
 interface ZettelStatusSidekickSettings {
@@ -44,13 +44,13 @@ export default class ZettelStatusSidekick extends Plugin {
 	async onload() {
 		await this.loadSettings();
 
-		this.addRibbonIcon('info', 'Note Status', (evt: MouseEvent) => {
+		this.addRibbonIcon('info', 'Note status', (evt: MouseEvent) => {
 			this.openNoteStatusPanel();
 		});
 
 		this.addCommand({
 			id: 'open-note-status-panel',
-			name: 'Open Note Status Panel',
+			name: 'Open note status panel',
 			callback: () => this.openNoteStatusPanel(),
 		});
 
@@ -77,8 +77,20 @@ export default class ZettelStatusSidekick extends Plugin {
 		this.addSettingTab(new ZettelStatusSidekickSettingTab(this.app, this));
 	}
 
+	async onunload() {
+		// Clean up resources when plugin unloads
+		this.app.workspace.detachLeavesOfType(NoteStatusPanelView.VIEW_TYPE);
+	}
+
 	async loadSettings() {
 		this.settings = Object.assign({}, DEFAULT_SETTINGS, await this.loadData());
+		// Normalize path settings
+		if (this.settings.hubFolderPath) {
+			this.settings.hubFolderPath = normalizePath(this.settings.hubFolderPath);
+		}
+		if (this.settings.mainNoteFolderPath) {
+			this.settings.mainNoteFolderPath = normalizePath(this.settings.mainNoteFolderPath);
+		}
 	}
 
 	async saveSettings() {
@@ -123,9 +135,8 @@ class NoteStatusPanelView extends ItemView {
 	}
 
 	getDisplayText() {
-		return 'Note Status';
+		return 'Note status';
 	}
-
 
 	getIcon() {
 		return 'rocket';
@@ -140,7 +151,8 @@ class NoteStatusPanelView extends ItemView {
 		container.empty();
 		container.addClass('zettelSidekick-note-status-panel');
 
-		const activeFile = this.plugin.app.workspace.getActiveFile();
+		const activeView = this.plugin.app.workspace.getActiveViewOfType(MarkdownView);
+		const activeFile = activeView?.file || this.plugin.app.workspace.getActiveFile();
 		if (!activeFile) {
 			container.createEl('p', { text: 'No active file.' });
 			return;
@@ -194,7 +206,7 @@ class NoteStatusPanelView extends ItemView {
 		// );
 
 		const linkedInHub = this.plugin.settings.checkLinkedInHub && result.file.inlinks?.some((link: TFile) =>
-			link.path.includes(this.plugin.settings.hubFolderPath)
+			link.path.includes(normalizePath(this.plugin.settings.hubFolderPath))
 		);
 
 		// Build the enabled checks list based on individual settings.
@@ -249,7 +261,7 @@ class NoteStatusPanelView extends ItemView {
 
 		// If the note passes all checks and auto-move is enabled, move the file.
 		if (allMet && this.plugin.settings.autoMoveToMain) {
-			const mainFolder = this.plugin.settings.mainNoteFolderPath;
+			const mainFolder = normalizePath(this.plugin.settings.mainNoteFolderPath);
 			// Check if note is not already in the destination folder.
 			if (!activeFile.path.startsWith(mainFolder + "/")) {
 				const newPath = `${mainFolder}/${activeFile.name}`;
@@ -363,7 +375,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					.setPlaceholder('Enter folder path')
 					.setValue(this.plugin.settings.hubFolderPath)
 					.onChange(async (value) => {
-						this.plugin.settings.hubFolderPath = value;
+						this.plugin.settings.hubFolderPath = normalizePath(value);
 						await this.plugin.saveSettings();
 					})
 			);
@@ -458,7 +470,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					.setPlaceholder('Enter folder path (e.g. Main)')
 					.setValue(this.plugin.settings.mainNoteFolderPath)
 					.onChange(async (value) => {
-						this.plugin.settings.mainNoteFolderPath = value;
+						this.plugin.settings.mainNoteFolderPath = normalizePath(value);
 						await this.plugin.saveSettings();
 						this.plugin.updateNoteStatusPanel();
 					})
@@ -515,10 +527,10 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 
-		new Setting(containerEl).setName('Custom Field Names').setHeading();
+		new Setting(containerEl).setName('Custom field names').setHeading();
 
 		new Setting(containerEl)
-			.setName('Field Names for Link Check')
+			.setName('Field names for link check')
 			.setDesc('Comma-separated list of custom field names to check for links. (Default: next, prev, related).  If empty, will check for all links.')
 			.addText(text =>
 				text
@@ -531,7 +543,7 @@ class ZettelStatusSidekickSettingTab extends PluginSettingTab {
 					})
 			);
 		new Setting(containerEl)
-			.setName('Zettel ID Field Name')
+			.setName('Zettel ID field name')
 			.setDesc('Name of the metadata field to use for the Zettel ID (e.g., "zettel_id" or "id").')
 			.addText(text =>
 				text
