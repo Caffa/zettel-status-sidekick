@@ -135,3 +135,5 @@ then any text with this field, will be considered a linked idea
 
 If the `Field Names for Link Check` is empty (no text), then we will search for all links in the file.
 
+## What style of Zettelkasten are you using?
+I documented it [here](https://creatorpreneurteststudio.substack.com/p/7-minute-zettelkasten-kickstart)
